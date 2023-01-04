@@ -16,7 +16,14 @@ export class Informacao {
       this.dataAtualizacao = new Date();
     }
   }
-
+  public static reorganizarIDs(result:Informacao[]):Informacao[]{
+      let n = 1;  
+    result.forEach((item)=>{
+    item.id = n;
+      n++;
+      })
+      return result;
+  }
   public static gerarInformacoes(tamanhoArray:number):Informacao[] {
     let data = ["Dickerson", "Larsen", "Geneva", "Jami"];
     let result:Informacao[] = [];
@@ -24,7 +31,7 @@ export class Informacao {
       result.push(new Informacao(data[Math.floor(Math.random() * data.length)]));
       result[n - 1].id = n;
     }
-    console.log(result);
+    result = this.reorganizarIDs(result);
     return result;
   }
 }
