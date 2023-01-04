@@ -4,7 +4,15 @@
       style="height: 120px">
       <b-button :block="true" ref="btnModalGerarInfo" squared variant="dark" @click="abrirModal('modal-gerarInformacoes', 'btnModalGerarInfo')">Gerar Informações</b-button>
       <div class="d-flex flex-row flex-wrap justify-content-between" style="width:50%">
-        <b-button squared variant="primary" v-b-modal.modal-gerarInformacoes>Registrar Informações</b-button>
+        <b-button squared variant="primary" ref="adicionarInformacaoBtn" @click="abrirModal('modal-Custom', 'adicionarInformacaoBtn')" >Registrar Informações</b-button>
+        <Modal typeModal="customModal">
+              <template #titleModal>
+                <h5 class="bg-danger w-100 h-100 p-3" style="color:white;">Adicionar ⚠</h5>
+              </template>
+
+              <template #bodyModal>Escolha os itens antes de deleta-los.</template>
+
+            </Modal>
         <div v-if="selected.length === 0">
           <b-button squared variant="danger" ref="deletarInfoBtn" @click="abrirModal('modal-Custom', 'deletarInfoBtn')">Deletar Informações</b-button>
           <div v-if="items.length === 0">
