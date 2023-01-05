@@ -64,7 +64,38 @@
         </template>
       </b-modal>
     </div>
+
+    <div v-else-if="typeModal === 'adicionarModal'">
+      <b-modal @hidden="cancelarFunc('adicionarInformacao')" id="modal-adicionarInformacao" :title="'Adicionar informação:'">
+        <template #modal-header>
+          <slot name="headerModal">
+          </slot>
+        </template>
+        <slot name="bodyModal"> </slot>
+        <template #modal-footer="{ salvar, cancelar }">
+          <!-- Emulate built in modal footer ok and cancel button actions -->
+        <slot name="footerModal"></slot>
+        </template>
+      </b-modal>
+    </div>
+
+    <div v-else-if="typeModal === 'limparModal'">
+      <b-modal @hidden="cancelarFunc('limparInformacao')" id="modal-limparInformacoes"
+   >
+        <template #modal-header>
+          <slot name="headerModal">
+          </slot>
+        </template>
+        <slot name="bodyModal"> </slot>
+        <template #modal-footer="{ salvar, cancelar }">
+          <!-- Emulate built in modal footer ok and cancel button actions -->
+        <slot name="footerModal"></slot>
+        </template>
+      </b-modal>
+    </div>
   </div>
+
+  
 </template>
 
 <script lang="ts">

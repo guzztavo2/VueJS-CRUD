@@ -6,15 +6,19 @@ export class Informacao {
   public informacao!: string;
   public dataCriacao!: Date;
   public dataAtualizacao!: Date;
+static informacao: any;
 
-  public constructor(informacao: string) {
-    if (this.informacao === undefined) {
+  public atualizarInformacao(informacaoAtualizada:string){
+    this.dataAtualizacao = new Date();
+    this.informacao = informacaoAtualizada;
+  }
+  public constructor(informacao: string|undefined) {
+    if (informacao !== undefined) {
       this.informacao = informacao;
       this.dataCriacao = new Date();
-    } else {
-      this.informacao = informacao;
-      this.dataAtualizacao = new Date();
-    }
+    } 
+    
+    
   }
   public static reorganizarIDs(result:Informacao[]):Informacao[]{
       let n = 1;  
