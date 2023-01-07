@@ -14,7 +14,6 @@
 
         </form>
         <template #modal-footer="{}">
-          <!-- Emulate built in modal footer ok and cancel button actions -->
           <b-button size="sm" variant="success" id="successBtn" @click="salvarInformacaoGerada">
             Gerar
           </b-button>
@@ -33,22 +32,14 @@
     <div v-else-if="typeModal === 'customModal'">
       <b-modal no-stacking ok-only id="modal-Custom" v-model="modalCustom" ref="modalCustomInformacoes">
         <template #modal-header>
-
           <slot name="titleModal"> </slot>
-
         </template>
         <slot name="bodyModal"> </slot>
       </b-modal>
       <template name="footerModal">
-      
+
       </template>
     </div>
-
-
-
-
-
-
 
     <div v-else-if="typeModal === 'editarModal'">
       <b-modal @hidden="cancelarFunc('editarInformacao')" id="modal-editarInformacao" :title="'Editar informação:'"
@@ -59,47 +50,44 @@
         </template>
         <slot name="bodyModal"> </slot>
         <template #modal-footer="{ salvar, cancelar }">
-          <!-- Emulate built in modal footer ok and cancel button actions -->
-        <slot name="footerModal"></slot>
+          <slot name="footerModal"></slot>
         </template>
       </b-modal>
     </div>
 
     <div v-else-if="typeModal === 'adicionarModal'">
-      <b-modal @hidden="cancelarFunc('adicionarInformacao')" id="modal-adicionarInformacao" :title="'Adicionar informação:'">
+      <b-modal @hidden="cancelarFunc('adicionarInformacao')" id="modal-adicionarInformacao"
+        :title="'Adicionar informação:'">
         <template #modal-header>
           <slot name="headerModal">
           </slot>
         </template>
         <slot name="bodyModal"> </slot>
         <template #modal-footer="{ salvar, cancelar }">
-          <!-- Emulate built in modal footer ok and cancel button actions -->
-        <slot name="footerModal"></slot>
+          <slot name="footerModal"></slot>
         </template>
       </b-modal>
     </div>
 
     <div v-else-if="typeModal === 'limparModal'">
-      <b-modal @hidden="cancelarFunc('limparInformacao')" id="modal-limparInformacoes"
-   >
+      <b-modal @hidden="cancelarFunc('limparInformacao')" id="modal-limparInformacoes">
         <template #modal-header>
           <slot name="headerModal">
           </slot>
         </template>
         <slot name="bodyModal"> </slot>
         <template #modal-footer="{ salvar, cancelar }">
-          <!-- Emulate built in modal footer ok and cancel button actions -->
-        <slot name="footerModal"></slot>
+          <slot name="footerModal"></slot>
         </template>
       </b-modal>
     </div>
   </div>
 
-  
+
 </template>
 
 <script lang="ts">
-import { Informacao } from "@/model/Model.Informacao.vue";
+import Informacao from "@/model/Model.Informacao.vue";
 
 export default {
   name: "Modal",
@@ -124,7 +112,7 @@ export default {
     stateInputFunc(refModal: string) {
       switch (refModal) {
         case 'gerarInformacoes':
-          gerarInformacoes(this);
+          gerarInformacoes((this as any));
           break;
       }
 
@@ -155,26 +143,23 @@ export default {
         (thisParent as any).nameState = null;
         return;
       }
-
     },
     cancelarFunc(modal: string) {
       switch (modal) {
         case 'gerarInformacoes':
-          this.$data.name = null;
-          this.$data.nameState = null;
+          (this as any).$data.name = null;
+          (this as any).$data.nameState = null;
           (this as any).modalGerarInformacoes = false;
           break;
         case 'editarInformacao':
           (this as any).modalEditarInformacao = false;
       }
-
       return;
     },
     salvarInformacaoGerada(bvModalEvent: Event) {
       bvModalEvent.preventDefault();
       (this as any).handleSubmit('gerarInformacoes');
     },
-
     handleSubmit(tipoModal: string) {
       switch (tipoModal) {
         case 'gerarInformacoes':
@@ -183,16 +168,13 @@ export default {
             listInformacoes = Informacao.gerarInformacoes(Number((this as any).name));
           else throw Error("Não é possivel gerar valor nulo por aqui");
 
-          if (this.$root.$refs.Render !== undefined)
+          if ((this as any).$root.$refs.Render !== undefined)
             (this as any).$root.$refs.Render.add(listInformacoes);
           (this as any).cancelarFunc(tipoModal);
 
           break;
       }
-
-
     }
-
   }
 };
 </script>

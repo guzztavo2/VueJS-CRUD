@@ -1,21 +1,25 @@
 
 
 <script lang="ts">
-export class Informacao {
+import Vue from 'vue'
+
+export default class Informacao extends Vue{
+ 
   public id!: number;
   public informacao!: string;
   public dataCriacao!: Date;
   public dataAtualizacao!: Date;
-static informacao: any;
+  public static informacao: any;
 
   public atualizarInformacao(informacaoAtualizada:string){
-    this.dataAtualizacao = new Date();
-    this.informacao = informacaoAtualizada;
+    (this as any).dataAtualizacao = new Date();
+    (this as any).informacao = informacaoAtualizada;
   }
   public constructor(informacao: string|undefined) {
+    super();
     if (informacao !== undefined) {
-      this.informacao = informacao;
-      this.dataCriacao = new Date();
+      (this as any).informacao = informacao;
+      (this as any).dataCriacao = new Date();
     } 
     
     

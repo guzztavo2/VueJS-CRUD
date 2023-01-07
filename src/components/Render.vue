@@ -5,35 +5,36 @@
       <b-button :block="true" ref="btnModalGerarInfo" squared variant="dark"
         @click="abrirModal('modal-gerarInformacoes', 'btnModalGerarInfo')">Gerar Informações</b-button>
 
-        <b-button class="w-100 d-block" squared variant="warning" ref="adicionarInformacaoBtn"
-          @click="abrirModal('modal-limparInformacoes', '')">Limpar todas Informações</b-button>
+      <b-button class="w-100 d-block" squared variant="warning" ref="adicionarInformacaoBtn"
+        @click="abrirModal('modal-limparInformacoes', '')">Limpar todas Informações</b-button>
 
-        <Modal typeModal="limparModal">
-          <template #headerModal>
-            <span style="color:black" class="d-block bg-warning radius-20 w-100 p-2">Limpar Informações ❗</span>
-          </template>
-          <template #bodyModal>
-            <span class="d-block bg-danger w-100 p-4" style="text-align:center; color:white" > Ao clicar em sim, você estará concordando em limpar a tabela inteira de dados. Você tem certeza de que quer fazer isso?</span>
-          </template>
-          <template #footerModal>
-            <div class="w-100 d-flex flex-row">
-              <b-button class="w-50 m-1" variant="warning"
-                @click="limparRegistros('modal-limparInformacoes')">Sim, quero limpar todos os dados da tabela.</b-button>
-              <b-button class="w-50 m-1" variant="dark" ref="cancelarbtn"
-                @click="fecharModal('modal-limparInformacoes', '')">Cancelar</b-button>
-            </div>
+      <Modal typeModal="limparModal">
+        <template #headerModal>
+          <span style="color:black" class="d-block bg-warning radius-20 w-100 p-2">Limpar Informações ❗</span>
+        </template>
+        <template #bodyModal>
+          <span class="d-block bg-danger w-100 p-4" style="text-align:center; color:white"> Ao clicar em sim, você
+            estará concordando em limpar a tabela inteira de dados. Você tem certeza de que quer fazer isso?</span>
+        </template>
+        <template #footerModal>
+          <div class="w-100 d-flex flex-row">
+            <b-button class="w-50 m-1" variant="warning" @click="limparRegistros('modal-limparInformacoes')">Sim, quero
+              limpar todos os dados da tabela.</b-button>
+            <b-button class="w-50 m-1" variant="dark" ref="cancelarbtn"
+              @click="fecharModal('modal-limparInformacoes', '')">Cancelar</b-button>
+          </div>
 
-          </template>
+        </template>
 
 
 
-        </Modal>  
+      </Modal>
       <div class="d-flex flex-row w-100 bg-black" style="justify-content:center">
         <b-button squared variant="primary" ref="adicionarInformacaoBtn"
           @click="abrirModal('modal-adicionarInformacao', 'adicionarInformacaoBtn')">Registrar Informações</b-button>
 
 
-      
+
         <div v-if="items.length === 0">
           <b-button squared variant="danger" ref="deletarInfoBtn"
             @click="abrirModal('modal-Custom', 'deletarInfoBtn')">Deletar Informações</b-button>
@@ -98,10 +99,9 @@
 
     <div class="d-md-flex flex-row flex-wrap justify-content-center align-items-center bg-light p-2">
 
-      <b-table :head-variant="'dark'" :table-variant="'light'" :select-mode="'multi'"
-        ref="selectableTable" selectable @row-selected="onRowSelected" striped hover :items="items"
-        :fields="headerTableList" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc" :per-page="perPage"
-        responsive sticky-header='500px' style="max-width: 100%;"
+      <b-table :head-variant="'dark'" :table-variant="'light'" :select-mode="'multi'" ref="selectableTable" selectable
+        @row-selected="onRowSelected" striped hover :items="items" :fields="headerTableList" :sort-by.sync="sortBy"
+        :sort-desc.sync="sortDesc" :per-page="perPage" responsive sticky-header='500px' style="max-width: 100%;"
         :current-page="currentPage">
         <template #head(Selecione)>
           <span block class="p-2" style="user-select:none; cursor:pointer" @click="selectAllRows">Selecionar</span>
@@ -119,12 +119,14 @@
 
 
         <template #cell(editarDeletar)="row">
-        <div class="w-100 d-flex flex-wrap">
-          <b-button inline class="w-50" style="max-width: 100%;min-width:90px" :ref="'btnEditar-' + row.item.id" v-bind:infoID="row.item.id" variant="warning"
-            @click="abrirModal('modal-editarInformacao', 'btnEditar-' + row.item.id)">Editar</b-button>
+          <div class="w-100 d-flex flex-wrap">
+            <b-button inline class="w-50" style="max-width: 100%;min-width:90px" :ref="'btnEditar-' + row.item.id"
+              v-bind:infoID="row.item.id" variant="warning"
+              @click="abrirModal('modal-editarInformacao', 'btnEditar-' + row.item.id)">Editar</b-button>
 
-          <b-button inline class="w-50" style="max-width: 100%; min-width:90px" variant="danger" @click="deletarItem(row.item)">Deletar</b-button>
-        </div>
+            <b-button inline class="w-50" style="max-width: 100%; min-width:90px" variant="danger"
+              @click="deletarItem(row.item)">Deletar</b-button>
+          </div>
         </template>
 
         <template #cell(dataAtualizacao)="row">
@@ -177,16 +179,16 @@
 
       </Modal>
     </div>
-    <div class="d-lg-flex w-100 p-0" >
+    <div class="d-lg-flex w-100 p-0">
 
-      <b-pagination size="lg" class="p-0 justify-content-center w-100" variant="warning" v-model="currentPage" :total-rows="rows"
-        :per-page="perPage"></b-pagination>
+      <b-pagination size="lg" class="p-0 justify-content-center w-100" variant="warning" v-model="currentPage"
+        :total-rows="rows" :per-page="perPage"></b-pagination>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Informacao } from '../model/Model.Informacao.vue';
+import Informacao from '../model/Model.Informacao.vue';
 import Modal from './Modal-box.vue';
 
 export interface inputAlert {
@@ -197,13 +199,13 @@ export interface inputAlert {
 export default {
   name: "Render",
   created() {
-    this.$root.$refs.Render = this;
-    if (this.items.length > 0)
-      this.informacaoEditada = this.items[0];
+    (this as any).$root.$refs.Render = this;
+    if ((this as any).items.length > 0)
+      (this as any).informacaoEditada = (this as any).items[0];
   },
   computed: {
     rows() {
-      return this.items.length
+      return (this as any).items.length
     },
 
   },
@@ -227,83 +229,85 @@ export default {
     Modal
   },
   methods: {
-    limparRegistros(idModal:string){
-      this.items = [];
-      this.fecharModal(idModal, '');
+    limparRegistros(idModal: string) {
+      (this as any).items = [];
+      (this as any).fecharModal(idModal, '');
     },
     salvarInformacaoRegistrada(idModal: string) {
-      let informacaoNova: Informacao = new Informacao(this.novaInformacao.informacao);
-      this.novaInformacao.informacao = '';
-      this.items.push(informacaoNova);
-      this.items = Informacao.reorganizarIDs(this.items);
-      this.fecharModal(idModal, '');
+      let informacaoNova: Informacao = new Informacao((this as any).novaInformacao.informacao);
+      (this as any).novaInformacao.informacao = '';
+      (this as any).items.push(informacaoNova);
+      (this as any).items = Informacao.reorganizarIDs((this as any).items);
+      (this as any).fecharModal(idModal, '');
     },
     inputRegistrarInformacaoAction(event: Event) {
       let quantidadeMin = 3;
       let targetLength = (event.target as any).value.length;
       if (targetLength < quantidadeMin) {
-        this.inputalert = { message: 'A informação tem de ser válida, se você clicar em salvar, nada será salvo. Faltam: ' + (quantidadeMin - targetLength) + ' caracteres. ', typeMessage: false }
+        (this as any).inputalert = { message: 'A informação tem de ser válida, se você clicar em salvar, nada será salvo. Faltam: ' + (quantidadeMin - targetLength) + ' caracteres. ', typeMessage: false }
       } else {
-        this.inputalert = { message: 'Agora está tudo certo! Clique em salvar. ', typeMessage: true }
+        (this as any).inputalert = { message: 'Agora está tudo certo! Clique em salvar. ', typeMessage: true }
 
       }
     },
     abrirModal(idModal: string, btnRef: string) {
       if (idModal === 'modal-editarInformacao') {
         let idInformacao: number = (this as any).$refs[btnRef].getAttribute('infoid');
-        this.informacaoEditada = Object.assign({}, this.items[idInformacao - 1])
-        this.inputalert = { message: 'Se você não editar as informações, ela não será atualizada.', typeMessage: undefined }
+        (this as any).informacaoEditada = { ... (this as any).items[idInformacao - 1] };
+        (this as any).inputalert = { message: 'Se você não editar as informações, ela não será atualizada.', typeMessage: undefined }
       }
-      this.$root.$emit('bv::show::modal', idModal, '#' + btnRef);
+      (this as any).$root.$emit('bv::show::modal', idModal, '#' + btnRef);
 
     },
     fecharModal(idModal: string, btnRef: string) {
-      this.inputalert = { message: '', typeMessage: undefined }
+      (this as any).inputalert = { message: '', typeMessage: undefined };
 
-      this.$root.$emit('bv::hide::modal', idModal, '#' + btnRef);
+      (this as any).$root.$emit('bv::hide::modal', idModal, '#' + btnRef);
 
     },
     salvarInformacaoEditada(idModal: string) {
-      this.items[(this as any).informacaoEditada.id - 1].atualizarInformacao((this as any).informacaoEditada.informacao);
-      this.fecharModal(idModal, '');
+      (this as any).items[(this as any).informacaoEditada.id - 1].atualizarInformacao((this as any).informacaoEditada.informacao);
+      (this as any).$refs.selectableTable.refresh();
+      (this as any).fecharModal(idModal, '');
     },
     onRowSelected(item: any) {
-      this.selected = item
+      (this as any).selected = item
     },
     add(items: Array<Informacao>): void {
       items.forEach((item) => {
 
-        this.$data.items.push(item);
-        this.$data.items = Informacao.reorganizarIDs(this.$data.items);
-        this.$data.informacaoEditada = this.$data.items[0];
+        (this as any).$data.items.push(item);
+        (this as any).$data.items = Informacao.reorganizarIDs((this as any).$data.items);
+        (this as any).$data.informacaoEditada = (this as any).$data.items[0];
       })
     },
     deletarInfo(event: any) {
-      if (this.selected.length > 0) {
-        let selected = this.selected, This = this;
+      if ((this as any).selected.length > 0) {
+        let selected = (this as any).selected, This = (this as any);
 
-        selected.forEach(function (item1) {
+        selected.forEach(function (item1: any) {
           This.deletarItem(item1);
         })
       }
-
-
-
     },
     deletarItem(informacaoDeletada: Informacao) {
-      this.items = this.items.filter(item => item !== informacaoDeletada)
+      (this as any).items = (this as any).items.filter((item: Informacao) => item !== informacaoDeletada);
     },
     selectAllRows() {
-      if (this.$refs.selectableTable !== undefined) {
-        if (this.selected.length !== 10)
-          (this as any).$refs.selectableTable.selectAllRows();
-        else
-          this.clearSelected();
-        return;
-      }
+
+      if ((this as any).selected.length == 0)
+        (this as any).$refs.selectableTable.selectAllRows();
+
+
+      else
+        (this as any).clearSelected();
+
+
+      return;
+
     },
     clearSelected() {
-      if (this.$refs.selectableTable !== undefined) {
+      if ((this as any).$refs.selectableTable !== undefined) {
         (this as any).$refs.selectableTable.clearSelected()
       }
     }
@@ -317,7 +321,7 @@ export default {
     // }
 
 
-  },
+  }
 
 };
 </script>

@@ -2,7 +2,7 @@
 import Header from './components/Header.vue';
 import Render from './components/Render.vue';
 
-import {Informacao} from './model/Model.Informacao.vue';
+import Informacao from './model/Model.Informacao.vue';
 
 let info = new Informacao('aa');
 
